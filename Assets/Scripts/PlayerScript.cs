@@ -6,7 +6,8 @@ public class PlayerScript : MonoBehaviour
 {
     public GameObject player;   
     public GameObject projectile;
-    public GameObject projectileClone;
+    public GameObject projectileClone1;
+    public GameObject projectileClone2;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +16,15 @@ public class PlayerScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+        
+       
+    { 
+        if (GameManager.lives > 0)
         movement();
         fireprojectile();
     }
     void movement()
-
+    
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -44,9 +48,13 @@ public class PlayerScript : MonoBehaviour
     }
     void fireprojectile()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && projectileClone1 == null)
         {
-            projectileClone = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
+            projectileClone1 = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
         }
-    } 
+        else if (Input.GetKeyDown(KeyCode.Space) && projectileClone2 == null)
+        {
+            projectileClone2 = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
+        }
+    }
 }

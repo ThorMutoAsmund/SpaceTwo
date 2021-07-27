@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7f8cd07a3d4344a820dc27e8b6e63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectille: {fileID: 6921799219841381750}
 --- !u!61 &2663433191421007297
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,4 +144,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
