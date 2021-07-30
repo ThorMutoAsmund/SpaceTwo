@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public GameObject enemyprojectile;
+    //public GameObject enemyprojectile;
     Vector3 respawn = new Vector3(7, 4, 0);
     // Start is called before the first frame update
     void Start()
@@ -17,14 +17,20 @@ public class EnemyProjectile : MonoBehaviour
     {
         transform.Translate(new Vector3(0, -5 * Time.deltaTime, 0));
 
-        if (transform.position.y < -5) { Destroy(enemyprojectile); }
+        if (transform.position.y < -5) { Destroy(this.gameObject); }
+
+        if (!GameManager.playGame)
+        {
+            Destroy(this.gameObject);
+        }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && GameManager.playGame)
         {
             collision.gameObject.transform.position = respawn; 
-            Destroy(enemyprojectile);
+            //Destroy(enemyprojectile);
             GameManager.lives--;
             GameManager.playGame = false;
         }
