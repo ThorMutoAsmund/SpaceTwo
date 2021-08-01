@@ -13,22 +13,12 @@ public class PlayerScript : MonoBehaviour
     public Button button;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Update()
     {
-        Debug.Log("STARTED");
-    }
+        FireProjectile();
 
-    // Update is called once per frame
-    void Update()
-    { 
-    }
-
-    public void FixedUpdate()
-    {
         if (GameManager.lives > 0)
         {
-            fireprojectile();
             movement();
 
             if (Mathf.Abs(variableJoystick.Vertical) > Mathf.Abs(variableJoystick.Horizontal))
@@ -54,10 +44,6 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
-
-
-        //Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-        //rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
     }
 
     void MoveRight(float amount = 1)
@@ -114,7 +100,8 @@ public class PlayerScript : MonoBehaviour
             MoveDown();
         }
     }
-    void fireprojectile()
+
+    void FireProjectile()
     {
         var buttonDown = this.button.GetDown();
 
@@ -124,11 +111,45 @@ public class PlayerScript : MonoBehaviour
             {
                 GameManager.playGame = true;
             }
-            projectileClone1 = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
+            else if (GameManager.playGame == false && GameManager.lives == -1)
+            {
+                GameManager.RestartGame();
+            }
+            
+            if (GameManager.lives > 0)
+            {
+                GameManager.PlayShotSound();
+                projectileClone1 = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
+            }
         }
         else if (projectileClone2 == null && (Input.GetKeyDown(KeyCode.Space) || buttonDown))
         {
-            projectileClone2 = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
+            if (GameManager.lives > 0)
+            {
+                GameManager.PlayShotSound();
+                projectileClone2 = Instantiate(projectile, new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0), player.transform.rotation) as GameObject;
+            }
         }
+    }
+
+    public void Die(Vector3 respawn)
+    {
+        IEnumerator FadeOut()
+        {
+            float size = 1.5f;
+            while (size > 0.1f)
+            {
+                size -= 0.025f;
+                player.transform.localScale = Vector3.one * size;
+                yield return null;
+            }
+            if (GameManager.lives > 0)
+            {
+                player.transform.position = respawn;
+                player.transform.localScale = Vector3.one * 1.5f;
+            }
+        }
+
+        StartCoroutine(FadeOut());
     }
 }

@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    //public GameObject enemyprojectile;
     Vector3 respawn = new Vector3(7, 4, 0);
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(new Vector3(0, -5 * Time.deltaTime, 0));
@@ -25,14 +22,16 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player" && GameManager.playGame)
         {
-            collision.gameObject.transform.position = respawn; 
-            //Destroy(enemyprojectile);
+            GameManager.PlayPlayerShotSound();
+
             GameManager.lives--;
             GameManager.playGame = false;
+
+            (collision.gameObject.GetComponent<PlayerScript>()).Die(respawn);
         }
     }
 }

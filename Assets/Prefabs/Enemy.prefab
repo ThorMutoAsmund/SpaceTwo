@@ -80,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 147846}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 689ad4ef133526b4db5115d8b3eccc69, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3935a8b993cceeb40bb26dbf42f6cac2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -144,7 +144,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.4, y: 0.4}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.4, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -161,9 +161,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 147846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ea9caee8885df44a950fb5c4371999, type: 3}
+  m_Script: {fileID: 11500000, guid: 93ce9b08a70ffaa4fa5a531eb25b82af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 147846}
-  enemyProjectile: {fileID: 6921799219841381750, guid: d03ed50cc8df90e40819e8972ba506a5, type: 3}
+  enemyProjectile: {fileID: 6921799219841381750, guid: e0ec7afbc495b3746a8b157d313f2fbb, type: 3}
   enemyProjectileClone: {fileID: 0}
